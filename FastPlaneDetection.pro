@@ -10,7 +10,8 @@ qtcAddDeployment()
 
 HEADERS += \
     utils.h \
-    settings.h
+    settings.h \
+    octree.h
 
 win32 {
     INCLUDEPATH += "$(OPENCV_INCLUDE_DIR)" \

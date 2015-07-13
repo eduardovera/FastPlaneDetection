@@ -6,7 +6,7 @@ using namespace std;
 
 /* BOX */
 
-string FILENAME = "C:\\Users\\eduardovera.PROGRAF\\Workspace\\FastPlaneDetection\\pointclouds\\box.off";
+string FILENAME = "../FastPlaneDetection/pointclouds/box.off";
 
 /**/
 

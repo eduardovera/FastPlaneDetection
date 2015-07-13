@@ -1,6 +1,7 @@
 #include <iostream>
 #include <settings.h>
 #include <utils.h>
+#include <octree.h>
 #include <opencv2/opencv.hpp>
 
 using namespace std;
