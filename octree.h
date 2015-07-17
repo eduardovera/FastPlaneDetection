@@ -28,10 +28,10 @@ namespace Octree {
         }
 
         void append(Vec3d *point) {
-            int sample_size = this->samples.size();
+            int sample_size = static_cast<int>(this->samples.size());
             centroid = (sample_size * centroid) + *point;
             this->samples.push_back(point);
-            centroid /= sample_size + 1;
+            centroid /= (sample_size + 1);
         }
 
         void computeCovariance() {
@@ -159,12 +159,9 @@ namespace Octree {
             return;
         }
 
-        if (node->level > SLEVEL) {
+        if (node->level >= SLEVEL) {
             node->computeCovariance();
             eigen(node->covariance, true, node->eigenvalues, node->eigenvectors);
-//            cout << node->eigenvalues << endl;
-//            cout << node->eigenvectors << endl;
-//            getchar();
             if ((node->eigenvalues(1) > (THICKNESS * node->eigenvalues(2))) && (node->eigenvalues(0) < (ISOTROPY * node->eigenvalues(1)))) {
                 node->isCoplanar = true;
                 nodes.push_back(node);

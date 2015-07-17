@@ -3,10 +3,12 @@
 
 #include <iostream>
 #include <opencv2/opencv.hpp>
+//#include <octree.h>
 #include <fstream>
 
 using namespace std;
 using namespace cv;
+using namespace Octree;
 
 void split(vector<string> &tokens, const string &text, string sep) {
     tokens.clear();
@@ -34,7 +36,26 @@ vector<Vec3d> readFile(string filename) {
     return points;
 }
 
+void writeToFile(string filename, vector<Node*> nodes, vector<Vec3d> normals) {
+    string content;
+    int count_samples = 0;
+    for (int k = 0; k < nodes.size(); k++) {
+        vector<Vec3d*> points = nodes[k]->samples;
+        count_samples += static_cast<int>(points.size());
+        cv::Vec3d color = 255 * Vec3d(1, 1, 1);
+        for (int i = 0; i < points.size(); i++) {
+            content += to_string((*points[i])[0]) + " " + to_string((*points[i])[1]) + " " + to_string((*points[i])[2]) + " " + to_string(abs(color[0])) + " " + to_string(abs(color[1]))+ " " + to_string(abs(color[2])) + "\n";
+        }
+    }
 
+    string header = "COFF " + to_string(count_samples) + " 0 0\n";
+
+    ofstream output;
+    output.open(filename);
+    output << header << content;
+    output.close();
+
+}
 
 #endif // UTILS
 

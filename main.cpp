@@ -1,7 +1,7 @@
 #include <iostream>
 #include <settings.h>
-#include <utils.h>
 #include <octree.h>
+#include <utils.h>
 #include <opencv2/opencv.hpp>
 
 using namespace std;
@@ -23,6 +23,9 @@ int main() {
     build(root);
     cout << "done!" << endl;
     cout << nodes.size() << " nodes generated." << endl;
+
+    writeToFile("output.off", nodes, vector<Vec3d>());
+
 
     return 0;
 }
